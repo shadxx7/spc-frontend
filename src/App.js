@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <Button size="large" type="danger">Fire Me</Button>
+          <Button size="large" type="danger">Hire Me</Button>
         </div>
       </Provider>
     );
