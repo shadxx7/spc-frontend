@@ -1,5 +1,17 @@
+@font-face {
+  font-family: lato;
+  src: url(fonts/Lato-Black.ttf);
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.signup-heading {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  font-family: "lato", sans-serif;
+  color: #002c55;
 }
