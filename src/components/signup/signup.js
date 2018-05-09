@@ -35,7 +35,7 @@ class SignUp extends Component {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
+      callback("The 2 passwords that you have entered are inconsistent!");
     } else {
       callback();
     }
@@ -47,6 +47,18 @@ class SignUp extends Component {
       form.validateFields(["confirm"], { force: true });
     }
     callback();
+  };
+
+  notWebmail = (rule, value, callback) => {
+    const form = this.props.form;
+    const check = "daiict.ac.in";
+    if (value && value.includes(check)) {
+      callback(
+        "Please enter an alternate Email ID which is not your Webmail ID."
+      );
+    } else {
+      callback();
+    }
   };
 
   render() {
@@ -77,7 +89,7 @@ class SignUp extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h1 className="text-center signup-heading">SPC Sign-Up</h1>
+        <h1 className="text-center signup-heading">Placement Cell Sign-Up</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [
@@ -98,6 +110,9 @@ class SignUp extends Component {
               {
                 required: true,
                 message: "Please enter a Email ID!"
+              },
+              {
+                validator: this.notWebmail
               }
             ]
           })(<Input />)}
@@ -130,8 +145,6 @@ class SignUp extends Component {
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <p>{this.props.signup.message}</p>
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Register
           </Button>

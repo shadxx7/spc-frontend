@@ -12,6 +12,7 @@ import "antd/dist/antd.css";
 import SignUpForm from "./signup/signup";
 import LoginForm from "./login/login";
 import Home from "./home/home";
+import ForgotPassword from "./forgot_password/forgot_password";
 
 const { Header, Content, Footer } = Layout;
 
@@ -25,12 +26,12 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Layout className="layout">
-            <Header>
-              <div className="logo" />
+            <Header style={{ position: "fixed", width: "100%" }}>
+              <div className="logo">DA-IICT Placement Cell</div>
               <Menu
                 theme="dark"
                 mode="horizontal"
-                style={{ lineHeight: "64px" }}
+                style={{ lineHeight: "64px", float: "right" }}
                 onClick={handleClick}
               >
                 <Menu.Item key="1">
@@ -44,11 +45,12 @@ class App extends Component {
                 </Menu.Item>
               </Menu>
             </Header>
-            <Content style={{ padding: "0 50px" }}>
+            <Content style={{ padding: "0 50px", marginTop: 64 }}>
               <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
                 <Switch>
                   <Route path="/signup" component={SignUpForm} />
                   <Route path="/login" component={LoginForm} />
+                  <Route path="/forgot_password" component={ForgotPassword} />
                   <Route path="/" component={Home} />
                 </Switch>
               </div>

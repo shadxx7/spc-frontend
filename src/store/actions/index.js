@@ -6,8 +6,6 @@ export const SIGN_UP = "sign_up";
 export const LOG_IN = "log_in";
 
 export function signUp(values) {
-  console.log(values);
-
   const request = axios.post(`${ROOT_URL}signup`, values);
 
   return dispatch => {
@@ -21,8 +19,6 @@ export function signUp(values) {
 }
 
 export function logIn(values) {
-  console.log(values);
-
   const request = axios.post(`${ROOT_URL}login`, values);
 
   return dispatch => {

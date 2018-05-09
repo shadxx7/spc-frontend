@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logIn } from "../../store/actions";
+import { Link } from "react-router-dom";
 
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 
@@ -12,12 +13,7 @@ class LogIn extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        const tempValue = {
-          sid: values.sid,
-          password: values.password
-        };
-        this.props.logIn(tempValue);
-        this.props.from.resetfields();
+        this.props.logIn(values);
       }
     });
   };
@@ -27,10 +23,22 @@ class LogIn extends Component {
       labelCol: { xs: { span: 24 }, sm: { span: 6 } },
       wrapperCol: { xs: { span: 24 }, sm: { span: 10 } }
     };
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0
+        },
+        sm: {
+          span: 16,
+          offset: 6
+        }
+      }
+    };
     return (
       <Form className="log_in login-form" onSubmit={this.handleSubmit}>
-        <h1 className="text-center signup-heading">SPC Log-In</h1>
-        <FormItem {...formItemLayout}>
+        <h1 className="text-center signup-heading">Placement Cell Log-In</h1>
+        <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [{ required: true, message: "Enter student ID!" }]
           })(
@@ -40,7 +48,7 @@ class LogIn extends Component {
             />
           )}
         </FormItem>
-        <FormItem {...formItemLayout}>
+        <FormItem {...formItemLayout} label="Password">
           {getFieldDecorator("password", {
             rules: [{ required: true, message: "Please input your Password!" }]
           })(
@@ -51,14 +59,11 @@ class LogIn extends Component {
             />
           )}
         </FormItem>
-        <FormItem {...formItemLayout}>
-          {getFieldDecorator("remember", {
-            valuePropName: "checked",
-            initialValue: true
-          })(<Checkbox>Remember me</Checkbox>)}
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
+        <FormItem {...tailFormItemLayout}>
+          <p>{this.props.login.message}</p>
+          <Link to="/forgot_password">
+            <a className="login-form-forgot">Forgot password</a>
+          </Link>
           <br />
           <Button
             type="primary"
