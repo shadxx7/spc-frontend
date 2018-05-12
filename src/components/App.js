@@ -13,6 +13,7 @@ import SignUpForm from "./signup/signup";
 import LoginForm from "./login/login";
 import Home from "./home/home";
 import ForgotPassword from "./forgot_password/forgot_password";
+import ResetPassword from "./reset_password/resetpassword";
 
 const { Header, Content, Footer } = Layout;
 
@@ -51,6 +52,7 @@ class App extends Component {
                   <Route path="/signup" component={SignUpForm} />
                   <Route path="/login" component={LoginForm} />
                   <Route path="/forgot_password" component={ForgotPassword} />
+                  <Route path="/reset_password" component={ResetPassword} />
                   <Route path="/" component={Home} />
                 </Switch>
               </div>
