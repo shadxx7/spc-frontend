@@ -26,9 +26,8 @@ class ForgotPasswordForm extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
-
     return (
-      <Form onSubmit={this.handleSubmit} className="wrapper">
+      <Form onSubmit={this.handleSubmit} className="form-wrapper">
         <FormItem {...tailFormItemLayout}>
           <p>
             Please enter you Student ID below and check your webmail to reset
@@ -49,7 +48,12 @@ class ForgotPasswordForm extends Component {
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <p>{this.props.forgot.message}</p>
-          <Button type="primary" htmlType="submit">
+          <Button
+            size="large"
+            type="primary"
+            htmlType="submit"
+            loading={this.props.forgot.loading}
+          >
             Send
           </Button>
         </FormItem>

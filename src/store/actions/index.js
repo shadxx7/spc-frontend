@@ -50,27 +50,41 @@ export function logIn(values) {
 }
 
 export function initFP(values) {
-  const request = axios.post(`${ROOT_URL}forgotpassword`, values);
-
   return dispatch => {
-    request.then(data =>
-      dispatch({
-        type: FORGOT_PASSWORD,
-        payload: data
-      })
-    );
+    dispatch({ type: LOADING_START });
+    axios({
+      method: "post",
+      url: `${ROOT_URL}forgotpassword`,
+      data: values
+    })
+      .then(data =>
+        dispatch({
+          type: FORGOT_PASSWORD,
+          payload: data
+        })
+      )
+      .then(() => {
+        dispatch({ type: LOADING_END });
+      });
   };
 }
 
 export function resetPassword(values) {
-  const request = axios.put(`${ROOT_URL}forgotpassword`, values);
-
   return dispatch => {
-    request.then(data =>
-      dispatch({
-        type: RESET_PASSWORD,
-        payload: data
-      })
-    );
+    dispatch({ type: LOADING_START });
+    axios({
+      method: "put",
+      url: `${ROOT_URL}forgotpassword`,
+      data: values
+    })
+      .then(data =>
+        dispatch({
+          type: RESET_PASSWORD,
+          payload: data
+        })
+      )
+      .then(() => {
+        dispatch({ type: LOADING_END });
+      });
   };
 }

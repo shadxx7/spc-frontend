@@ -3,47 +3,20 @@ import { connect } from "react-redux";
 import { Icon, Form, Input, Button } from "antd";
 
 //Action Creators
-import { resetPassword } from "../../store/actions";
+import { signUp } from "../../store/actions";
 
 //Form Layout
 import { formItemLayout, tailFormItemLayout } from "../form_layout";
 
 //CSS
-import "../../style/reset_password.css";
+import "../../style/signup.css";
 
 const FormItem = Form.Item;
 
-class ResetPassword extends Component {
+class SignUp extends Component {
   state = {
-    confirmDirty: false,
-    token: "",
-    message: ""
+    confirmDirty: false
   };
-
-  componentWillMount(state) {
-    const tempUrl = window.location.href;
-    const splitUrl = tempUrl.split("=");
-    const tempToken = splitUrl[1];
-    this.setState({ token: tempToken });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    if (
-      nextProps.reset.message === "Error. Could not update password." ||
-      nextProps.reset.message === "Server Error. Something Broke!"
-    ) {
-      alert(
-        "Error. Could not update password because of some issue. Please try again."
-      );
-    } else if (nextProps.reset.message === "Password Successfully updated.") {
-      this.state.message =
-        nextProps.reset.message + " Redirecting to login .......";
-      setTimeout(props => {
-        this.props.history.push("/login");
-      }, 2000);
-    }
-  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -51,10 +24,11 @@ class ResetPassword extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         const tempValue = {
-          token: this.state.token,
+          sid: values.sid,
+          email: values.email,
           password: values.password
         };
-        this.props.resetPassword(tempValue);
+        this.props.signUp(tempValue);
         this.props.form.resetFields();
       }
     });
@@ -81,19 +55,69 @@ class ResetPassword extends Component {
     }
     callback();
   };
+
+  notWebmail = (rule, value, callback) => {
+    const check = "daiict.ac.in";
+    if (value && value.includes(check)) {
+      callback(
+        "Please enter an alternate Email ID which is not your Webmail ID."
+      );
+    } else {
+      callback();
+    }
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
+
     return (
-      <Form className="wrapper" onSubmit={this.handleSubmit}>
-        <FormItem {...tailFormItemLayout}>
-          <p>Please enter your new password below.</p>
+      <Form className="form-wrapper" onSubmit={this.handleSubmit}>
+        <h1 className="heading">Sign Up</h1>
+        <FormItem {...formItemLayout} label="Student ID">
+          {getFieldDecorator("sid", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter a Student ID!"
+              }
+            ]
+          })(
+            <Input
+              type="number"
+              prefix={<Icon type="user" className="input-icon-style" />}
+              placeholder="StudentID"
+            />
+          )}
+        </FormItem>
+        <FormItem {...formItemLayout} label="Email">
+          {getFieldDecorator("email", {
+            rules: [
+              {
+                type: "email",
+                message: "Please enter a valid Email ID!"
+              },
+              {
+                required: true,
+                message: "Please enter a Email ID!"
+              },
+              {
+                validator: this.notWebmail
+              }
+            ]
+          })(
+            <Input
+              type="email"
+              prefix={<Icon type="mail" className="input-icon-style" />}
+              placeholder="Email"
+            />
+          )}
         </FormItem>
         <FormItem {...formItemLayout} label="Password">
           {getFieldDecorator("password", {
             rules: [
               {
                 required: true,
-                message: "Please input your new password!"
+                message: "Please input your password!"
               },
               {
                 validator: this.validateToNextPassword
@@ -121,16 +145,21 @@ class ResetPassword extends Component {
           })(
             <Input
               type="password"
+              onBlur={this.handleConfirmBlur}
               prefix={<Icon type="lock" className="input-icon-style" />}
               placeholder="Confirm Password"
-              onBlur={this.handleConfirmBlur}
             />
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <p>{this.state.message}</p>
-          <Button type="primary" htmlType="submit">
-            Reset Password
+          <p>{this.props.signup.message}</p>
+          <Button
+            size="large"
+            type="primary"
+            htmlType="submit"
+            loading={this.props.signup.loading}
+          >
+            Register
           </Button>
         </FormItem>
       </Form>
@@ -138,10 +167,10 @@ class ResetPassword extends Component {
   }
 }
 
-const ResetPasswordForm = Form.create()(ResetPassword);
+const SignUpForm = Form.create()(SignUp);
 
 function mapStateToProps(state) {
-  return { reset: state.reset };
+  return { signup: state.signup };
 }
 
-export default connect(mapStateToProps, { resetPassword })(ResetPasswordForm);
+export default connect(mapStateToProps, { signUp })(SignUpForm);

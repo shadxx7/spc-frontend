@@ -9,6 +9,9 @@ import { logIn } from "../../store/actions";
 //Form Layout
 import { formItemLayout, tailFormItemLayout } from "../form_layout";
 
+//CSS
+import "../../style/login.css";
+
 const FormItem = Form.Item;
 
 class LogIn extends Component {
@@ -24,8 +27,8 @@ class LogIn extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form className="wrapper" onSubmit={this.handleSubmit}>
-        <h1 className="text-center heading">Placement Cell Log-In</h1>
+      <Form className="form-wrapper" onSubmit={this.handleSubmit}>
+        <h1 className="heading">Log in</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [{ required: true, message: "Enter student ID!" }]
@@ -54,6 +57,7 @@ class LogIn extends Component {
           </Link>
           <br />
           <Button
+            size="large"
             type="primary"
             htmlType="submit"
             loading={this.props.login.loading}
