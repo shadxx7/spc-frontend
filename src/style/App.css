@@ -1,0 +1,41 @@
+.header-style {
+  position: fixed;
+  width: 100%;
+}
+
+.logo {
+  font-size: 25px;
+  font-family: "lato", sans-serif;
+  position: fixed;
+  color: #dbdbdb;
+}
+
+#top-menu {
+  line-height: 64px;
+  float: right;
+}
+
+#content-style {
+  padding: 0 50px;
+  margin-top: 64px;
+  background: #fff;
+}
+
+@media (min-height: 650px) {
+  .footer-style {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.footer-style {
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  text-align: center;
+}

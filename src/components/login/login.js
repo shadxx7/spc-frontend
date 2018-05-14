@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logIn } from "../../store/actions";
 import { Link } from "react-router-dom";
+import { Form, Icon, Input, Button } from "antd";
 
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+//Action Creators
+import { logIn } from "../../store/actions";
+
+//Form Layout
+import { formItemLayout, tailFormItemLayout } from "../form_layout";
 
 const FormItem = Form.Item;
 
@@ -19,31 +23,15 @@ class LogIn extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
-    const formItemLayout = {
-      labelCol: { xs: { span: 24 }, sm: { span: 6 } },
-      wrapperCol: { xs: { span: 24 }, sm: { span: 10 } }
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 6
-        }
-      }
-    };
     return (
-      <Form className="log_in login-form" onSubmit={this.handleSubmit}>
-        <h1 className="text-center signup-heading">Placement Cell Log-In</h1>
+      <Form className="wrapper" onSubmit={this.handleSubmit}>
+        <h1 className="text-center heading">Placement Cell Log-In</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [{ required: true, message: "Enter student ID!" }]
           })(
             <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<Icon type="user" className="input-icon-style" />}
               placeholder="StudentID"
             />
           )}
@@ -53,7 +41,7 @@ class LogIn extends Component {
             rules: [{ required: true, message: "Please input your Password!" }]
           })(
             <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<Icon type="lock" className="input-icon-style" />}
               type="password"
               placeholder="Password"
             />
@@ -68,7 +56,7 @@ class LogIn extends Component {
           <Button
             type="primary"
             htmlType="submit"
-            className="login-form-button"
+            loading={this.props.login.loading}
           >
             Log in
           </Button>

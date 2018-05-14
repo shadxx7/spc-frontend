@@ -1,14 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Icon, Form, Input, Button } from "antd";
+
+//Action Creators
 import { resetPassword } from "../../store/actions";
-import { Form, Input, Button } from "antd";
+
+//Form Layout
+import { formItemLayout, tailFormItemLayout } from "../form_layout";
+
+//CSS
+import "../../style/reset_password.css";
 
 const FormItem = Form.Item;
 
 class ResetPassword extends Component {
   state = {
-    confirmDirty: false
+    confirmDirty: false,
+    token: "",
+    message: ""
   };
+
+  componentWillMount(state) {
+    const tempUrl = window.location.href;
+    const splitUrl = tempUrl.split("=");
+    const tempToken = splitUrl[1];
+    this.setState({ token: tempToken });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (
+      nextProps.reset.message === "Error. Could not update password." ||
+      nextProps.reset.message === "Server Error. Something Broke!"
+    ) {
+      alert(
+        "Error. Could not update password because of some issue. Please try again."
+      );
+    } else if (nextProps.reset.message === "Password Successfully updated.") {
+      this.state.message =
+        nextProps.reset.message + " Redirecting to login .......";
+      setTimeout(props => {
+        this.props.history.push("/login");
+      }, 2000);
+    }
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -16,6 +51,7 @@ class ResetPassword extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         const tempValue = {
+          token: this.state.token,
           password: values.password
         };
         this.props.resetPassword(tempValue);
@@ -47,33 +83,11 @@ class ResetPassword extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
-
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 10 }
-      }
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 6
-        }
-      }
-    };
-
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h1 className="text-center signup-heading">Rest Password</h1>
+      <Form className="wrapper" onSubmit={this.handleSubmit}>
+        <FormItem {...tailFormItemLayout}>
+          <p>Please enter your new password below.</p>
+        </FormItem>
         <FormItem {...formItemLayout} label="Password">
           {getFieldDecorator("password", {
             rules: [
@@ -85,7 +99,13 @@ class ResetPassword extends Component {
                 validator: this.validateToNextPassword
               }
             ]
-          })(<Input type="password" />)}
+          })(
+            <Input
+              type="password"
+              prefix={<Icon type="lock" className="input-icon-style" />}
+              placeholder="Password"
+            />
+          )}
         </FormItem>
         <FormItem {...formItemLayout} label="Confirm Password">
           {getFieldDecorator("confirm", {
@@ -98,9 +118,17 @@ class ResetPassword extends Component {
                 validator: this.compareToFirstPassword
               }
             ]
-          })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+          })(
+            <Input
+              type="password"
+              prefix={<Icon type="lock" className="input-icon-style" />}
+              placeholder="Confirm Password"
+              onBlur={this.handleConfirmBlur}
+            />
+          )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
+          <p>{this.state.message}</p>
           <Button type="primary" htmlType="submit">
             Reset Password
           </Button>
@@ -113,7 +141,7 @@ class ResetPassword extends Component {
 const ResetPasswordForm = Form.create()(ResetPassword);
 
 function mapStateToProps(state) {
-  return { resetpassword: state.resetpassword };
+  return { reset: state.reset };
 }
 
 export default connect(mapStateToProps, { resetPassword })(ResetPasswordForm);

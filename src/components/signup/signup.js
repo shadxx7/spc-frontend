@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Icon, Form, Input, Button } from "antd";
+
+//Action Creators
 import { signUp } from "../../store/actions";
 
-import { Form, Input, Button } from "antd";
+//Form Layout
+import { formItemLayout, tailFormItemLayout } from "../form_layout";
+
+//CSS
+import "../../style/signup.css";
 
 const FormItem = Form.Item;
 
@@ -50,7 +57,6 @@ class SignUp extends Component {
   };
 
   notWebmail = (rule, value, callback) => {
-    const form = this.props.form;
     const check = "daiict.ac.in";
     if (value && value.includes(check)) {
       callback(
@@ -64,32 +70,9 @@ class SignUp extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 10 }
-      }
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 6
-        }
-      }
-    };
-
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h1 className="text-center signup-heading">Placement Cell Sign-Up</h1>
+      <Form className="wrapper" onSubmit={this.handleSubmit}>
+        <h1 className="text-center heading">Placement Cell Sign-Up</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [
@@ -98,7 +81,13 @@ class SignUp extends Component {
                 message: "Please enter a Student ID!"
               }
             ]
-          })(<Input type="number" />)}
+          })(
+            <Input
+              type="number"
+              prefix={<Icon type="user" className="input-icon-style" />}
+              placeholder="StudentID"
+            />
+          )}
         </FormItem>
         <FormItem {...formItemLayout} label="Email">
           {getFieldDecorator("email", {
@@ -115,7 +104,13 @@ class SignUp extends Component {
                 validator: this.notWebmail
               }
             ]
-          })(<Input />)}
+          })(
+            <Input
+              type="email"
+              prefix={<Icon type="mail" className="input-icon-style" />}
+              placeholder="Email"
+            />
+          )}
         </FormItem>
         <FormItem {...formItemLayout} label="Password">
           {getFieldDecorator("password", {
@@ -128,7 +123,13 @@ class SignUp extends Component {
                 validator: this.validateToNextPassword
               }
             ]
-          })(<Input type="password" />)}
+          })(
+            <Input
+              type="password"
+              prefix={<Icon type="lock" className="input-icon-style" />}
+              placeholder="Password"
+            />
+          )}
         </FormItem>
         <FormItem {...formItemLayout} label="Confirm Password">
           {getFieldDecorator("confirm", {
@@ -141,11 +142,22 @@ class SignUp extends Component {
                 validator: this.compareToFirstPassword
               }
             ]
-          })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+          })(
+            <Input
+              type="password"
+              onBlur={this.handleConfirmBlur}
+              prefix={<Icon type="lock" className="input-icon-style" />}
+              placeholder="Confirm Password"
+            />
+          )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <p>{this.props.signup.message}</p>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={this.props.signup.loading}
+          >
             Register
           </Button>
         </FormItem>
