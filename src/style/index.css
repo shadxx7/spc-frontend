@@ -20,3 +20,9 @@ body {
 .input-icon-style {
   color: rgba(0, 0, 0, 0.25);
 }
+
+#content-style {
+  padding: 0 50px;
+  margin-top: 64px;
+  background: #fff;
+}

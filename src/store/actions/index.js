@@ -88,3 +88,23 @@ export function resetPassword(values) {
       });
   };
 }
+
+// export function fetchUserProfile(token) {
+//   return dispatch => {
+//     dispatch({ type: LOADING_START });
+//     axios({
+//       method: "get",
+//       url: `${ROOT_URL}profile`,
+//       headers: { "x-access-token": token }
+//     })
+//       .then(data =>
+//         dispatch({
+//           type: RESET_PASSWORD,
+//           payload: data
+//         })
+//       )
+//       .then(() => {
+//         dispatch({ type: LOADING_END });
+//       });
+//   };
+// }

@@ -15,25 +15,15 @@ import "./style/App.css";
 import Navbar from "./components/nav/nav";
 
 //Routes
-import SuperRoute from "./routes/index";
-
-const { Content } = Layout;
+import IndexRoutes from "./routes/index";
 
 class App extends Component {
-  state = {
-    current: "home"
-  };
-
   render() {
     return (
       <Provider store={store}>
         <Layout className="layout">
           <Navbar />
-          <Content id="content-style">
-            <div>
-              <SuperRoute />
-            </div>
-          </Content>
+          <IndexRoutes />
         </Layout>
       </Provider>
     );
