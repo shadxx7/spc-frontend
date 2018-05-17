@@ -7,7 +7,9 @@ export default function(state = { message: "", loading: false }, action) {
     case LOG_IN:
       return {
         ...state,
-        message: action.payload.data.message
+        message: action.payload.data.message,
+        admin: action.payload.data.admin,
+        token: action.payload.data.token
       };
     case LOADING_END:
       return { ...state, loading: false };

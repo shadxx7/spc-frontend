@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Form, Icon, Input, Button } from "antd";
+
+import UserMain from "../../components/user";
 
 //Action Creators
 import { logIn } from "../../store/actions";
@@ -24,6 +26,14 @@ class LogIn extends Component {
       }
     });
   };
+
+  componentWillReceiveProps(newProps) {
+    if (this.props !== newProps) {
+      if (newProps.login.admin) {
+        return <Redirect to={{ pathname: "/user" }} />;
+      }
+    }
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
