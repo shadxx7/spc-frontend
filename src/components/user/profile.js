@@ -10,11 +10,29 @@ class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchUserProfile(this.props.user.token);
   }
+
   details() {
     if (this.props.user.edit) {
       return <DetailsEdit token={this.props.user.token} />;
     } else if (!this.props.user.edit) {
       return <DetailsUnedit />;
+    }
+  }
+
+  adminVerify() {
+    const temp = this.props.user.profile.isAdminVerified;
+    if (temp) {
+      return (
+        <div>
+          <Icon type="check" /> Approved
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Icon type="close-circle-o" /> Not Approved
+        </div>
+      );
     }
   }
 
@@ -45,9 +63,12 @@ class UserProfile extends Component {
           </Col>
         </Row>
         <Row>
-          <h2 className="text-center profile-heading">
-            Profile <Icon type="user" />
-          </h2>
+          <Col className="profile-heading">
+            <h2 className="text-center">
+              Profile <Icon type="user" />
+            </h2>
+            <p className="text-center">{this.adminVerify()}</p>
+          </Col>
         </Row>
         {this.details()}
       </div>

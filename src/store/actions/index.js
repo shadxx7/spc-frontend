@@ -135,6 +135,9 @@ export function updateUserProfile(values, token) {
         });
       })
       .then(() => {
+        dispatch({ type: EDIT_CHANGE });
+      })
+      .then(() => {
         dispatch({ type: LOADING_END });
       });
   };

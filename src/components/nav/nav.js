@@ -26,7 +26,7 @@ class Navbar extends Component {
     const width = window.innerWidth;
     if (width >= 600) {
       return (
-        <Header className="header-style shadow-lg">
+        <Header className="header-style">
           <div className="logo">DA-IICT Placement Cell</div>
           <Menu theme="dark" mode="horizontal" id="top-menu">
             <Menu.Item key="home">
