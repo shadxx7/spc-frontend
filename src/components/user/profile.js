@@ -1,15 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Col, Row, List } from "antd";
-// import { fetchUserProfile } from "../../store/actions";
+import { Button, Col, Row, Icon } from "antd";
+import { fetchUserProfile, editChange } from "../../store/actions";
 
-const data = [
-  {
-    title: "Ant Design Title 1"
-  }
-];
+import DetailsUnedit from "./details_unedit";
+import DetailsEdit from "./details_edit";
 
 class UserProfile extends Component {
+  componentDidMount() {
+    this.props.fetchUserProfile(this.props.user.token);
+  }
+  details() {
+    if (this.props.user.edit) {
+      return <DetailsEdit token={this.props.user.token} />;
+    } else if (!this.props.user.edit) {
+      return <DetailsUnedit />;
+    }
+  }
+
+  handleEdit = () => {
+    this.props.editChange();
+  };
+
   render() {
     return (
       <div>
@@ -22,34 +34,31 @@ class UserProfile extends Component {
             </p>
           </Col>
           <Col>
-            <Button type="primary" icon="edit">
+            <Button
+              type="primary"
+              icon="edit"
+              onClick={this.handleEdit}
+              disabled={this.props.user.edit}
+            >
               Edit Profile
             </Button>
           </Col>
         </Row>
         <Row>
-          <List
-            itemLayout="horizontal"
-            dataSource={data}
-            renderItem={item => (
-              <List.Item>
-                <List.Item.Meta
-                  title={<a>{item.title}</a>}
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
-              </List.Item>
-            )}
-          />
+          <h2 className="text-center profile-heading">
+            Profile <Icon type="user" />
+          </h2>
         </Row>
+        {this.details()}
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return { profile: state.profile };
-// }
+function mapStateToProps(state) {
+  return { user: state.user };
+}
 
-// export default connect(mapStateToProps, { fetchUserProfile })(UserProfile);
-
-export default UserProfile;
+export default connect(mapStateToProps, { fetchUserProfile, editChange })(
+  UserProfile
+);

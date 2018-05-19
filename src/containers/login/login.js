@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { Form, Icon, Input, Button } from "antd";
-
-import UserMain from "../../components/user";
+import { Link } from "react-router-dom";
+import { Form, Icon, Input, Button, Alert, message } from "antd";
 
 //Action Creators
 import { logIn } from "../../store/actions";
@@ -17,6 +15,19 @@ import "../../style/login.css";
 const FormItem = Form.Item;
 
 class LogIn extends Component {
+  componentWillReceiveProps(nextProps) {
+    const admin = nextProps.login.admin;
+    const tempMessage = nextProps.login.message;
+    if (tempMessage === "Successful Authentication") {
+      if (admin) {
+        message.success("Successful Admin Log in");
+        this.props.history.push("/admin");
+      } else {
+        message.success("Successful Log in");
+        this.props.history.push("/user");
+      }
+    }
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -27,15 +38,27 @@ class LogIn extends Component {
     });
   };
 
-  componentWillReceiveProps(newProps) {
-    if (this.props !== newProps) {
-      if (newProps.login.admin) {
-        return <Redirect to={{ pathname: "/user" }} />;
-      }
+  showError() {
+    if (
+      this.props.login.message &&
+      this.props.login.message !== "Successful Authentication"
+    ) {
+      return (
+        <Alert
+          className="alert-login"
+          message={this.props.login.message}
+          type="error"
+          showIcon
+        />
+      );
+    } else {
+      return;
     }
   }
+
   render() {
     const { getFieldDecorator } = this.props.form;
+
     return (
       <Form className="form-wrapper" onSubmit={this.handleSubmit}>
         <h1 className="heading">Log in</h1>
@@ -61,7 +84,7 @@ class LogIn extends Component {
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <p>{this.props.login.message}</p>
+          {this.showError()}
           <Link to="/forgot_password">
             <a className="login-form-forgot">Forgot password</a>
           </Link>

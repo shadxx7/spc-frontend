@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Icon, Form, Input, Button } from "antd";
+import { Icon, Form, Input, Button, Alert } from "antd";
 
 //Action Creators
 import { signUp } from "../../store/actions";
@@ -41,6 +41,9 @@ class SignUp extends Component {
 
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
+    if (value.length <= 8) {
+      callback("Please enter a password with atleat 8 characters long.");
+    }
     if (value && value !== form.getFieldValue("password")) {
       callback("The 2 passwords that you have entered are inconsistent!");
     } else {
@@ -50,6 +53,9 @@ class SignUp extends Component {
 
   validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
+    if (value.length <= 8) {
+      callback("Please enter a password with atleat 8 characters long.");
+    }
     if (value && this.state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
     }
@@ -66,6 +72,29 @@ class SignUp extends Component {
       callback();
     }
   };
+
+  showError() {
+    const message = this.props.signup.message;
+    if (message && message !== "New user created Successfully") {
+      return (
+        <Alert
+          className="alert-login"
+          message={this.props.signup.message}
+          type="error"
+          showIcon
+        />
+      );
+    } else if (message && message === "New user created Successfully") {
+      return (
+        <Alert
+          className="alert-login"
+          message="Successfully Registered"
+          type="success"
+          showIcon
+        />
+      );
+    }
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -117,7 +146,7 @@ class SignUp extends Component {
             rules: [
               {
                 required: true,
-                message: "Please input your password!"
+                message: "Please enter your password!"
               },
               {
                 validator: this.validateToNextPassword
@@ -152,8 +181,9 @@ class SignUp extends Component {
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <p>{this.props.signup.message}</p>
+          {this.showError()}
           <Button
+            className="register-button"
             size="large"
             type="primary"
             htmlType="submit"

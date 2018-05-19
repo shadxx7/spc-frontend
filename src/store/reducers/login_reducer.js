@@ -8,8 +8,7 @@ export default function(state = { message: "", loading: false }, action) {
       return {
         ...state,
         message: action.payload.data.message,
-        admin: action.payload.data.admin,
-        token: action.payload.data.token
+        admin: action.payload.data.admin
       };
     case LOADING_END:
       return { ...state, loading: false };
