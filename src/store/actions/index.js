@@ -13,6 +13,9 @@ export const USER_LOG_IN = "user_log_in";
 export const FETCH_USER_PROFILE = "fetch_user_profile";
 export const UPDATE_USER_PROFILE = "update_user_profile";
 export const EDIT_CHANGE = "edit_change";
+export const GET_USER_LIST = "get_user_list";
+export const GET_USER = "get_user";
+export const APPROVE_USER = "approve_user";
 
 export function signUp(values) {
   return dispatch => {
@@ -146,5 +149,47 @@ export function updateUserProfile(values, token) {
 export function editChange() {
   return dispatch => {
     dispatch({ type: EDIT_CHANGE });
+  };
+}
+
+export function getUserList(token) {
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${ROOT_URL}profile/list`,
+      headers: { "x-access-token": token }
+    }).then(data => {
+      dispatch({
+        type: GET_USER_LIST,
+        payload: data
+      });
+    });
+  };
+}
+
+export function getUser(sid, token) {
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${ROOT_URL}profile/${sid}`,
+      headers: { "x-access-token": token }
+    }).then(data => {
+      dispatch({
+        type: GET_USER,
+        payload: data
+      });
+    });
+  };
+}
+
+export function approveUser(sid, token) {
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${ROOT_URL}profile/${sid}`,
+      headers: { "x-access-token": token }
+    }).then(data => {
+      dispatch({ type: APPROVE_USER, payload: data });
+    });
   };
 }

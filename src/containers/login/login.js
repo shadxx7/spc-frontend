@@ -21,7 +21,7 @@ class LogIn extends Component {
     if (tempMessage === "Successful Authentication") {
       if (admin) {
         message.success("Successful Admin Log in");
-        this.props.history.push("/admin");
+        this.props.history.push("/admin/users");
       } else {
         message.success("Successful Log in");
         this.props.history.push("/user");

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 //User Views
-import UserMain from "../components/user";
+import UserMain from "../containers/user";
 
 class UserRoutes extends Component {
   render() {
