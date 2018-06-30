@@ -3,13 +3,13 @@ import axios from "axios";
 const ROOT_URL = "http://localhost:5000/";
 
 export const SIGN_UP = "sign_up";
-export const LOG_IN = "log_in";
+export const SIGN_IN = "log_in";
 export const FORGOT_PASSWORD = "forgot_password";
 export const RESET_PASSWORD = "reset_password";
 export const LOADING_START = "loading_start";
 export const LOADING_END = "loading_end";
-export const ADMIN_LOG_IN = "admin_log_in";
-export const USER_LOG_IN = "user_log_in";
+export const ADMIN_SIGN_IN = "admin_log_in";
+export const USER_SIGN_IN = "user_log_in";
 export const FETCH_USER_PROFILE = "fetch_user_profile";
 export const UPDATE_USER_PROFILE = "update_user_profile";
 export const EDIT_CHANGE = "edit_change";
@@ -40,7 +40,7 @@ export function signUp(values) {
   };
 }
 
-export function logIn(values) {
+export function signIn(values) {
   return dispatch => {
     dispatch({ type: LOADING_START });
     axios({
@@ -51,12 +51,12 @@ export function logIn(values) {
       .then(data => {
         localStorage.setItem("TOKEN", data.data.token);
         if (data.data.admin) {
-          dispatch({ type: ADMIN_LOG_IN, payload: data });
+          dispatch({ type: ADMIN_SIGN_IN, payload: data });
         } else {
-          dispatch({ type: USER_LOG_IN, payload: data });
+          dispatch({ type: USER_SIGN_IN, payload: data });
         }
         dispatch({
-          type: LOG_IN,
+          type: SIGN_IN,
           payload: data
         });
       })

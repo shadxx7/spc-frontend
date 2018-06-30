@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Button } from "antd";
 import { Link } from "react-router-dom";
 
 //CSS
@@ -7,7 +7,11 @@ import "../../style/user.css";
 
 const { Sider } = Layout;
 
-class UserDashboard extends Component {
+class UserMenu extends Component {
+  handleClick = () => {
+    localStorage.removeItem("TOKEN");
+  };
+
   render() {
     return (
       <Sider width={200} className="user-sider">
@@ -22,10 +26,15 @@ class UserDashboard extends Component {
               <Icon type="user" />Employer List
             </Link>
           </Menu.Item>
+          <Menu.Item key="4">
+            <Button href="/home" onClick={this.handleClick}>
+              Sign out
+            </Button>
+          </Menu.Item>
         </Menu>
       </Sider>
     );
   }
 }
 
-export default UserDashboard;
+export default UserMenu;

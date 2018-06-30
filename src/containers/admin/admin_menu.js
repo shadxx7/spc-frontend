@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Button } from "antd";
 import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
 
 class AdminMenu extends Component {
+  handleClick = () => {
+    localStorage.removeItem("TOKEN");
+  };
+
   render() {
     return (
       <Sider width={200} className="admin-sider">
@@ -23,6 +27,11 @@ class AdminMenu extends Component {
             <Link to="/admin/employer_list">
               <Icon type="user" />Employer List
             </Link>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <Button href="/home" onClick={this.handleClick}>
+              Sign out
+            </Button>
           </Menu.Item>
         </Menu>
       </Sider>

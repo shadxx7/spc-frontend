@@ -40,7 +40,6 @@ class EmployerList extends Component {
     const data = this.props.admin.list;
     return (
       <div>
-        <p>Fire</p>
         <Table columns={columns} dataSource={data} />
       </div>
     );

@@ -1,5 +1,5 @@
 .admin-main {
-  margin-top: 64px;
+  background: #fff;
 }
 
 .admin-content {
@@ -14,7 +14,13 @@
 
 .admin-menu {
   padding-top: 50px;
-  height: 100%;
+  width: 200px;
+  position: fixed !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .admin-top-row {
@@ -43,4 +49,8 @@
 
 .employer-form-field-ctc {
   width: 400px !important;
+}
+
+.employer-form-title {
+  margin-left: 7%;
 }

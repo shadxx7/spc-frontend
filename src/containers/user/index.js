@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserDashboard from "./user_dash";
+import UserMenu from "./user_menu";
 import { Switch, Route } from "react-router-dom";
 import { Layout } from "antd";
 
@@ -14,8 +14,8 @@ const { Content } = Layout;
 class UserMain extends Component {
   render() {
     return (
-      <Layout className="user-main">
-        <UserDashboard />
+      <Layout>
+        <UserMenu />
         <Layout>
           <Content className="user-content">
             <Switch>

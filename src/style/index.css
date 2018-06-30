@@ -4,25 +4,20 @@
 }
 
 body {
+  background-color: #f0f2f5;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
 .heading {
-  padding-top: 10px;
+  padding-top: 25px;
   padding-bottom: 30px;
-  padding-left: 25%;
+  padding-left: 32%;
   font-family: "lato", sans-serif;
   color: #1890ff;
 }
 
 .input-icon-style {
   color: rgba(0, 0, 0, 0.25);
-}
-
-#content-style {
-  padding: 0 50px;
-  margin-top: 64px;
-  background: #fff;
 }

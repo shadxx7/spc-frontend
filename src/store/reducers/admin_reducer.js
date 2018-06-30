@@ -1,5 +1,5 @@
 import {
-  ADMIN_LOG_IN,
+  ADMIN_SIGN_IN,
   GET_USER_LIST,
   GET_USER,
   APPROVE_USER,
@@ -13,7 +13,7 @@ export default function(
   action
 ) {
   switch (action.type) {
-    case ADMIN_LOG_IN:
+    case ADMIN_SIGN_IN:
       return {
         ...state,
         token: action.payload.data.token

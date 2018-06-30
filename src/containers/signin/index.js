@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 import { Form, Icon, Input, Button, Alert, message } from "antd";
 
 //Action Creators
-import { logIn } from "../../store/actions";
+import { signIn } from "../../store/actions";
 
 //Form Layout
 import { formItemLayout, tailFormItemLayout } from "../form_layout";
 
 //CSS
-import "../../style/login.css";
+import "../../style/signin.css";
 
 const FormItem = Form.Item;
 
-class LogIn extends Component {
+class SignIn extends Component {
   componentWillReceiveProps(nextProps) {
-    const admin = nextProps.login.admin;
-    const tempMessage = nextProps.login.message;
+    const admin = nextProps.signin.admin;
+    const tempMessage = nextProps.signin.message;
     if (tempMessage === "Successful Authentication") {
       if (admin) {
         message.success("Successful Admin Log in");
@@ -33,20 +33,20 @@ class LogIn extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        this.props.logIn(values);
+        this.props.signIn(values);
       }
     });
   };
 
   showError() {
     if (
-      this.props.login.message &&
-      this.props.login.message !== "Successful Authentication"
+      this.props.signin.message &&
+      this.props.signin.message !== "Successful Authentication"
     ) {
       return (
         <Alert
-          className="alert-login"
-          message={this.props.login.message}
+          className="alert-signin"
+          message={this.props.signin.message}
           type="error"
           showIcon
         />
@@ -60,8 +60,11 @@ class LogIn extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form className="form-wrapper" onSubmit={this.handleSubmit}>
-        <h1 className="heading">Log in</h1>
+      <Form
+        className="signin-form-wrapper mx-auto"
+        onSubmit={this.handleSubmit}
+      >
+        <h1 className="heading">Sign in</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
             rules: [{ required: true, message: "Enter student ID!" }]
@@ -86,29 +89,32 @@ class LogIn extends Component {
         <FormItem {...tailFormItemLayout}>
           {this.showError()}
           <Link to="/forgot_password">
-            <a className="login-form-forgot">Forgot password</a>
+            <a>Forgot password</a>
           </Link>
           <br />
           <Button
             size="large"
             type="primary"
             htmlType="submit"
-            loading={this.props.login.loading}
+            loading={this.props.signin.loading}
           >
-            Log in
+            Sign in
           </Button>
           <br />
-          Or <a href="http://localhost:3000/signup">register now!</a>
+          Or <a href="http://localhost:3000/signup">Sign up now!</a>
         </FormItem>
       </Form>
     );
   }
 }
 
-const LogInForm = Form.create()(LogIn);
+const SignInForm = Form.create()(SignIn);
 
 function mapStateToProps(state) {
-  return { login: state.login };
+  return { signin: state.signin };
 }
 
-export default connect(mapStateToProps, { logIn })(LogInForm);
+export default connect(
+  mapStateToProps,
+  { signIn }
+)(SignInForm);
