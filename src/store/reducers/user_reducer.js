@@ -7,10 +7,14 @@ import {
   EDIT_CHANGE,
   GET_EMPLOYER_LIST
 } from "../actions";
-import user_employer_list from "../../containers/user/user_employer_list";
 
 export default function(
-  state = { token: "", profile: {}, edit: false, loading: false },
+  state = {
+    token: localStorage.getItem("TOKEN"),
+    profile: {},
+    edit: false,
+    loading: false
+  },
   action
 ) {
   switch (action.type) {

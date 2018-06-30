@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getEmployer } from "../../store/actions";
-import moment from "moment";
-import { Row, Col, Button, Icon, message, Divider } from "antd";
+import { Row, Col, Icon, message } from "antd";
 
 class EmployerShow extends Component {
   componentDidMount() {

@@ -8,7 +8,10 @@ import {
   GET_EMPLOYER
 } from "../actions";
 
-export default function(state = { token: "", disabled: false }, action) {
+export default function(
+  state = { token: localStorage.getItem("TOKEN"), disabled: false },
+  action
+) {
   switch (action.type) {
     case ADMIN_LOG_IN:
       return {

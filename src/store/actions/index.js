@@ -49,6 +49,7 @@ export function logIn(values) {
       data: values
     })
       .then(data => {
+        localStorage.setItem("TOKEN", data.data.token);
         if (data.data.admin) {
           dispatch({ type: ADMIN_LOG_IN, payload: data });
         } else {

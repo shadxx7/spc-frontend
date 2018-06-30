@@ -5,7 +5,7 @@ import { Layout } from "antd";
 //Component Imports
 import SignUpForm from "../containers/signup/signup";
 import LoginForm from "../containers/login/login";
-import Home from "../components/home/home";
+import Home from "../components/home";
 import ForgotPassword from "../containers/forgot_password/forgot_password";
 import ResetPassword from "../containers/reset_password/reset_password";
 
