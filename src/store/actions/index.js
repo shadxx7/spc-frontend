@@ -16,6 +16,9 @@ export const EDIT_CHANGE = "edit_change";
 export const GET_USER_LIST = "get_user_list";
 export const GET_USER = "get_user";
 export const APPROVE_USER = "approve_user";
+export const EMPLOYER_ADD = "employer_add";
+export const GET_EMPLOYER_LIST = "get_employer_list";
+export const GET_EMPLOYER = "get_employer";
 
 export function signUp(values) {
   return dispatch => {
@@ -190,6 +193,54 @@ export function approveUser(sid, token) {
       headers: { "x-access-token": token }
     }).then(data => {
       dispatch({ type: APPROVE_USER, payload: data });
+    });
+  };
+}
+
+export function employerAdd(values, token) {
+  return dispatch => {
+    console.log(token);
+    console.log(values);
+
+    axios({
+      method: "post",
+      url: `${ROOT_URL}employer/add`,
+      headers: { "x-access-token": token },
+      data: values
+    }).then(data => {
+      dispatch({ type: EMPLOYER_ADD, payload: data });
+    });
+  };
+}
+
+export function getEmployerList(token) {
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${ROOT_URL}employer/list`,
+      headers: { "x-access-token": token }
+    }).then(data => {
+      dispatch({
+        type: GET_EMPLOYER_LIST,
+        payload: data
+      });
+    });
+  };
+}
+
+export function getEmployer(id, token) {
+  console.log(id);
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${ROOT_URL}employer/${id}`,
+      headers: { "x-access-token": token }
+    }).then(data => {
+      console.log(data);
+      dispatch({
+        type: GET_EMPLOYER,
+        payload: data
+      });
     });
   };
 }

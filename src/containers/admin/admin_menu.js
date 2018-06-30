@@ -14,6 +14,16 @@ class AdminMenu extends Component {
               <Icon type="user" />Users
             </Link>
           </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/admin/employer_form">
+              <Icon type="user" />Employer Form
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/admin/employer_list">
+              <Icon type="user" />Employer List
+            </Link>
+          </Menu.Item>
         </Menu>
       </Sider>
     );

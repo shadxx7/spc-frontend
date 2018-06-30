@@ -4,8 +4,10 @@ import {
   UPDATE_USER_PROFILE,
   LOADING_START,
   LOADING_END,
-  EDIT_CHANGE
+  EDIT_CHANGE,
+  GET_EMPLOYER_LIST
 } from "../actions";
+import user_employer_list from "../../containers/user/user_employer_list";
 
 export default function(
   state = { token: "", profile: {}, edit: false, loading: false },
@@ -27,6 +29,8 @@ export default function(
       return { ...state, edit: !state.edit };
     case LOADING_END:
       return { ...state, loading: false };
+    case GET_EMPLOYER_LIST:
+      return { ...state, list: action.payload.data.companyList };
     default:
       return state;
   }

@@ -2,7 +2,10 @@ import {
   ADMIN_LOG_IN,
   GET_USER_LIST,
   GET_USER,
-  APPROVE_USER
+  APPROVE_USER,
+  EMPLOYER_ADD,
+  GET_EMPLOYER_LIST,
+  GET_EMPLOYER
 } from "../actions";
 
 export default function(state = { token: "", disabled: false }, action) {
@@ -22,6 +25,12 @@ export default function(state = { token: "", disabled: false }, action) {
       };
     case APPROVE_USER:
       return { ...state, message: action.payload.data.message };
+    case EMPLOYER_ADD:
+      return { ...state, message: action.payload.data.message };
+    case GET_EMPLOYER_LIST:
+      return { ...state, list: action.payload.data.companyList };
+    case GET_EMPLOYER:
+      return { ...state, employer: action.payload.data.employer };
     default:
       return state;
   }

@@ -2,44 +2,45 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
-import { getUserList } from "../../store/actions";
+import { getEmployerList } from "../../store/actions";
 
 const columns = [
   {
-    title: "First Name",
-    dataIndex: "firstName",
+    title: "Company Name",
+    dataIndex: "name",
     key: "name"
   },
   {
-    title: "Last Name",
-    dataIndex: "lastName",
-    key: "name"
+    title: "Category",
+    dataIndex: "category",
+    key: "category"
   },
   {
-    title: "Student ID",
-    dataIndex: "sid",
-    key: "sid"
+    title: "Job Type",
+    dataIndex: "jobType",
+    key: "jobType"
   },
   {
     title: "Action",
     key: "action",
     render: (text, record) => (
       <span>
-        <Link to={`/admin/user/${record.sid}`}>View</Link>
+        <Link to={`/admin/employer/${record._id}`}>View</Link>
       </span>
     )
   }
 ];
 
-class UserList extends Component {
+class EmployerList extends Component {
   componentDidMount() {
-    this.props.getUserList(this.props.admin.token);
+    this.props.getEmployerList(this.props.admin.token);
   }
 
   render() {
     const data = this.props.admin.list;
     return (
       <div>
+        <p>Fire</p>
         <Table columns={columns} dataSource={data} />
       </div>
     );
@@ -52,5 +53,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getUserList }
-)(UserList);
+  { getEmployerList }
+)(EmployerList);

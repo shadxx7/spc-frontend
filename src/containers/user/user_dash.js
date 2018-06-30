@@ -17,6 +17,11 @@ class UserDashboard extends Component {
               <Icon type="user" />Profile
             </Link>
           </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/user/employers">
+              <Icon type="user" />Employer List
+            </Link>
+          </Menu.Item>
         </Menu>
       </Sider>
     );

@@ -8,7 +8,7 @@ import { Row, Col, Button, Icon, message } from "antd";
 class UserShow extends Component {
   componentDidMount() {
     const tempSid = window.location.href;
-    const splitSid = tempSid.split("admin/");
+    const splitSid = tempSid.split("admin/user/");
     const sid = splitSid[1];
     this.props.getUser(sid, this.props.admin.token);
   }
@@ -149,4 +149,7 @@ function mapStateToProps(state) {
   return { admin: state.admin };
 }
 
-export default connect(mapStateToProps, { getUser, approveUser })(UserShow);
+export default connect(
+  mapStateToProps,
+  { getUser, approveUser }
+)(UserShow);

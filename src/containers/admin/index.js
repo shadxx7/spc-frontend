@@ -9,6 +9,9 @@ import "../../style/admin.css";
 import AdminMenu from "./admin_menu";
 import UserList from "./user_list";
 import UserShow from "./user_show";
+import EmployerForm from "./employer_form";
+import EmployerList from "./employer_list";
+import EmployerShow from "./employer_show";
 
 const { Content } = Layout;
 
@@ -20,8 +23,11 @@ class AdminMain extends Component {
         <Layout>
           <Content className="admin-content">
             <Switch>
+              <Route path="/admin/employer_list" component={EmployerList} />
+              <Route path="/admin/employer_form" component={EmployerForm} />
               <Route path="/admin/users" component={UserList} />
-              <Route path="/:sid" component={UserShow} />
+              <Route path="/admin/employer/:id" component={EmployerShow} />
+              <Route path="/admin/user/:sid" component={UserShow} />
             </Switch>
           </Content>
         </Layout>

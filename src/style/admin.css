@@ -24,3 +24,23 @@
 .admin-back-arrow {
   font-size: 30px;
 }
+
+.module-wrapper {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 600px;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 50%;
+  padding-top: 30px;
+}
+
+.employer-form-field {
+  width: 400px !important;
+}
+
+.employer-form-field-ctc {
+  width: 400px !important;
+}
