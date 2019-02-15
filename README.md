@@ -1,5 +1,7 @@
 # Student Placement Cell Website Frontend (React)
 
+This project is discontinued and the code is only to be used as reference.
+
 ## Instructions to start the React App
 
 - Install yarn [here](https://yarnpkg.com/en/docs/install)
