@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Alert, message } from "antd";
 
 //Action Creators
