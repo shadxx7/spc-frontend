@@ -41,7 +41,7 @@ class SignUp extends Component {
 
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
-    if (value.length <= 8) {
+    if (value && value.length <= 8) {
       callback("Please enter a password with atleat 8 characters long.");
     }
     if (value && value !== form.getFieldValue("password")) {
@@ -53,7 +53,7 @@ class SignUp extends Component {
 
   validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
-    if (value.length <= 8) {
+    if (value && value.length <= 8) {
       callback("Please enter a password with atleat 8 characters long.");
     }
     if (value && this.state.confirmDirty) {
@@ -100,7 +100,10 @@ class SignUp extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form className="form-wrapper" onSubmit={this.handleSubmit}>
+      <Form
+        className="signup-form-wrapper mx-auto"
+        onSubmit={this.handleSubmit}
+      >
         <h1 className="heading">Sign Up</h1>
         <FormItem {...formItemLayout} label="Student ID">
           {getFieldDecorator("sid", {
@@ -203,4 +206,7 @@ function mapStateToProps(state) {
   return { signup: state.signup };
 }
 
-export default connect(mapStateToProps, { signUp })(SignUpForm);
+export default connect(
+  mapStateToProps,
+  { signUp }
+)(SignUpForm);

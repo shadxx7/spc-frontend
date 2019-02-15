@@ -1,5 +1,5 @@
 import {
-  USER_LOG_IN,
+  USER_SIGN_IN,
   FETCH_USER_PROFILE,
   UPDATE_USER_PROFILE,
   LOADING_START,
@@ -20,7 +20,7 @@ export default function(
   switch (action.type) {
     case LOADING_START:
       return { ...state, loading: true };
-    case USER_LOG_IN:
+    case USER_SIGN_IN:
       return {
         ...state,
         token: action.payload.data.token

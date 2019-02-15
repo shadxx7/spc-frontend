@@ -3,8 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import { Layout } from "antd";
 
 //Component Imports
-import SignUpForm from "../containers/signup/signup";
-import LoginForm from "../containers/login/login";
+import SignUpForm from "../containers/signup";
+import SignInForm from "../containers/signin";
 import Home from "../components/home";
 import ForgotPassword from "../containers/forgot_password/forgot_password";
 import ResetPassword from "../containers/reset_password/reset_password";
@@ -17,7 +17,7 @@ class RootRoutes extends Component {
       <Content id="content-style">
         <Switch>
           <Route path="/signup" component={SignUpForm} />
-          <Route path="/login" component={LoginForm} />
+          <Route path="/signin" component={SignInForm} />
           <Route path="/forgot_password" component={ForgotPassword} />
           <Route path="/reset_password" component={ResetPassword} />
           <Route path="/" component={Home} />

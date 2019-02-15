@@ -1,9 +1,9 @@
-.register-button {
-  margin-top: 20px;
+.alert-siginin {
+  width: 180px;
 }
 
-.signup-form-wrapper {
-  width: 600px;
+.signin-form-wrapper {
+  max-width: 450px;
   margin-top: 5%;
   background-color: white;
   border: 1px solid #e8e8e8;

@@ -1,10 +1,10 @@
-import { LOG_IN, LOADING_START, LOADING_END } from "../actions";
+import { SIGN_IN, LOADING_START, LOADING_END } from "../actions";
 
 export default function(state = { message: "", loading: false }, action) {
   switch (action.type) {
     case LOADING_START:
       return { ...state, loading: true };
-    case LOG_IN:
+    case SIGN_IN:
       return {
         ...state,
         message: action.payload.data.message,

@@ -24,100 +24,103 @@ class EmployerFormModule extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form className="module-wrapper" onSubmit={this.handleSubmit}>
-        <FormItem className="employer-form-field" label="Company Name">
-          {getFieldDecorator("name", {
-            rules: [
-              {
-                required: true,
-                message: "Please enter a Company Name."
-              }
-            ]
-          })(<Input type="text" placeholder="Company Name" />)}
-        </FormItem>
-        <FormItem className="employer-form-field" label="Category">
-          {getFieldDecorator("category", {
-            rules: [
-              {
-                required: true,
-                message: "Please select the category."
-              }
-            ]
-          })(
-            <Select placeholder="Category">
-              <Option value="A1">A1</Option>
-              <Option value="A">A</Option>
-            </Select>
-          )}
-        </FormItem>
-        <FormItem label="CTC">
-          {getFieldDecorator("ctc", {
-            rules: [
-              {
-                required: true,
-                message: "Please enter your password!"
-              }
-            ]
-          })(
-            <InputNumber
-              className="employer-form-field-ctc"
-              placeholder="CTC"
-            />
-          )}
-        </FormItem>
-        <FormItem className="employer-form-field" label="Description">
-          {getFieldDecorator("description", {
-            rules: [
-              {
-                required: true,
-                message: "Please enter your description."
-              }
-            ]
-          })(<TextArea rows={4} />)}
-        </FormItem>
-        <FormItem className="employer-form-field" label="Profile">
-          {getFieldDecorator("profile", {
-            rules: [
-              {
-                required: true,
-                message: "Please enter a Profile."
-              }
-            ]
-          })(<Input type="text" placeholder="Profile" />)}
-        </FormItem>
-        <FormItem className="employer-form-field" label="Job Type">
-          {getFieldDecorator("jobType", {
-            rules: [
-              {
-                required: true,
-                message: "Please select a jobType."
-              }
-            ]
-          })(
-            <Select placeholder="Job Type">
-              <Option value="I2">2 Month Internship</Option>
-              <Option value="I6">6 Month Internship</Option>
-              <Option value="J">Job</Option>
-              <Option value="I+J">Internship and Job</Option>
-            </Select>
-          )}
-        </FormItem>
-        <FormItem className="employer-form-field" label="Batch">
-          {getFieldDecorator("batch", {
-            rules: [
-              {
-                required: true,
-                message: "Please enter a Batch."
-              }
-            ]
-          })(<Input type="text" placeholder="Batch" />)}
-        </FormItem>
-        <FormItem>
-          <Button size="large" type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </FormItem>
-      </Form>
+      <div>
+        <h1 className="employer-form-title">Employer Form</h1>
+        <Form className="module-wrapper" onSubmit={this.handleSubmit}>
+          <FormItem className="employer-form-field" label="Company Name">
+            {getFieldDecorator("name", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter a Company Name."
+                }
+              ]
+            })(<Input type="text" placeholder="Company Name" />)}
+          </FormItem>
+          <FormItem className="employer-form-field" label="Category">
+            {getFieldDecorator("category", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please select the category."
+                }
+              ]
+            })(
+              <Select placeholder="Category">
+                <Option value="A1">A1</Option>
+                <Option value="A">A</Option>
+              </Select>
+            )}
+          </FormItem>
+          <FormItem label="CTC">
+            {getFieldDecorator("ctc", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter your password!"
+                }
+              ]
+            })(
+              <InputNumber
+                className="employer-form-field-ctc"
+                placeholder="CTC"
+              />
+            )}
+          </FormItem>
+          <FormItem className="employer-form-field" label="Description">
+            {getFieldDecorator("description", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter your description."
+                }
+              ]
+            })(<TextArea rows={4} />)}
+          </FormItem>
+          <FormItem className="employer-form-field" label="Profile">
+            {getFieldDecorator("profile", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter a Profile."
+                }
+              ]
+            })(<Input type="text" placeholder="Profile" />)}
+          </FormItem>
+          <FormItem className="employer-form-field" label="Job Type">
+            {getFieldDecorator("jobType", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please select a jobType."
+                }
+              ]
+            })(
+              <Select placeholder="Job Type">
+                <Option value="I2">2 Month Internship</Option>
+                <Option value="I6">6 Month Internship</Option>
+                <Option value="J">Job</Option>
+                <Option value="I+J">Internship and Job</Option>
+              </Select>
+            )}
+          </FormItem>
+          <FormItem className="employer-form-field" label="Batch">
+            {getFieldDecorator("batch", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter a Batch."
+                }
+              ]
+            })(<Input type="text" placeholder="Batch" />)}
+          </FormItem>
+          <FormItem>
+            <Button size="large" type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </FormItem>
+        </Form>
+      </div>
     );
   }
 }
@@ -130,4 +133,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { employerAdd })(EmployerForm);
+export default connect(
+  mapStateToProps,
+  { employerAdd }
+)(EmployerForm);
